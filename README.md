@@ -1,2 +1,2 @@
 # ArduinoMyLibrary
-Basic Math and Function
+Basic Math and Function and easy examples.
