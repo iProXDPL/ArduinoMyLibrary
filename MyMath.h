@@ -72,6 +72,7 @@ float My_ln(float x){
 }
 
 //Method Newton-Rawson
+
 float MySqrt(float y) {
   float x = y / 2;
   int i=0;
@@ -84,6 +85,7 @@ float MySqrt(float y) {
   }
   return x;
 }
+
 float MyLn(float y){
   float x = y,x1;
   int i=0;
@@ -251,13 +253,9 @@ float Bisection(float y) {
   } else {
     for (int i = 0; i < 50; i++) {
       c = 0.5 * (a + b);
-      //Serial.println("c w forze");
-      // Serial.println(c);
       fc = fun(c, y);
       ep = abs(b - a);
       if (ep < delta) {
-        Serial.print("Bisekcja iteracje ");
-        Serial.println(i);
         break;
       }
       if (fb * fc < 0) {
@@ -283,13 +281,9 @@ float Falsi(float y) {
   } else {
     for (int i = 0; i < 50; i++) {
       c = b - (b - a) * fb / (fb - fa);
-      //Serial.println("c w forze");
-      // Serial.println(c);
       fc = fun(c, y);
       ep = min(abs(a - c), abs(b - c));
       if (ep < delta) {
-        Serial.print("Falsi iteracje ");
-        Serial.println(i);
         break;
       }
       if (fb * fc < 0) {
@@ -313,8 +307,6 @@ float Newton(float y) {
     ep = abs(x1 - x);
     ksi = ep / abs(x1);
     if (ep < delta || ksi < delta) {
-      Serial.print("Newton iteracje ");
-      Serial.println(i);
       break;
     }
     x = x1;
@@ -339,8 +331,6 @@ float Secants(float y) {
       ep = abs(x1 - x);
       ksi = x0 + delta;
       if (ep < delta || ksi < delta) {
-        Serial.print("Siecznych iteracje ");
-        Serial.println(i);
         break;
       }
       x0 = x;
