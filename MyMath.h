@@ -1,4 +1,77 @@
 //Math
+
+//Array Taylor
+float My_sqrt(float x){
+  float eps=1e-6;
+  float ds=1;
+  float s=1;
+  for(int i=1;i<50;i++){
+    ds=-ds*((2*i)*(2*i-1)*x)/(i*i*4);
+    s+=ds/(1-(2*i));
+    if(abs(ds/s)<eps){
+      break;
+    }
+  }
+  return s;
+}
+
+float My_exp(float x){
+  float eps = 1e-10;
+  float ds = 1;
+  float s = 1;
+  for(int i=1; i<50; i++){
+    ds = ds *(x/i);
+    s = s + ds;
+    if(abs(ds)<eps){
+      break;
+    }
+  }
+  return s;
+}
+
+float My_sin(float x){
+  float eps=1e-4;
+  float ds=x;
+  float s=x;
+  for(int i=2;i<50;i++){
+    ds = -ds * x * x / ((2*i-1)*(2*i-2));
+    s += ds;
+    if(abs(ds/s)<eps){
+      break;
+    }
+  }
+  return s;
+}
+
+float My_cos(float x){
+  float eps=1e-4;
+  float ds=1;
+  float s=1;
+  for(int i=1;i<50;i++){
+    ds = -ds *( x * x )/((2*i)*(2*i-1));
+    s += ds;
+    if(abs(ds/s)<eps){
+      break;
+    }
+  }
+  return s;
+}
+
+float My_ln(float x){
+  float eps=1e-6;
+  float ds = x;
+  float s = x;
+  for(int i = 2; i < 50; i++){
+    ds = -ds * x;
+    s += ds / i;
+    if(abs(ds/s)<eps){
+      break;
+    }
+  }
+  return s;
+}
+
+//Method Newton-Rawson
 float MySqrt(float liczba) {
   float x = liczba / 2;
   int i=0;
@@ -21,7 +94,7 @@ float MyLn(float y){
   }
   return x;
 }
-//Trygonometria
+
 float arcsin(float y){
   float x = y,x1;
   int i=0;
@@ -32,6 +105,7 @@ float arcsin(float y){
   }
   return x;
 }
+
 float arccos(float y){
   float x = y,x1;
   int i=0;
@@ -42,6 +116,7 @@ float arccos(float y){
   }
   return x;
 }
+
 float arcsinh(float y){
   float x = y,x1;
   int i=0;
@@ -54,6 +129,7 @@ float arcsinh(float y){
   }
   return x;
 }
+
 float arccosh(float y){
   float x = y,x1;
   int i=0;
