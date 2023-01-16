@@ -72,12 +72,12 @@ float My_ln(float x){
 }
 
 //Method Newton-Rawson
-float MySqrt(float liczba) {
-  float x = liczba / 2;
+float MySqrt(float y) {
+  float x = y / 2;
   int i=0;
-  while (abs(x - liczba / x) > 0.000001) {
-    x = (x + liczba / x) / 2;
-    if (x * x == liczba) {
+  while (abs(x - y / x) > 0.000001) {
+    x = (x + y / x) / 2;
+    if (x * x == y) {
       break;
     }
     i++;
