@@ -58,3 +58,47 @@ function gmin(a,b)
 	return (fu<fv)? u:v; 
 }
 console.log("Efekt koncowy",gmin(0,512));
+
+function fun(x,y) {
+  return (x * x - y);
+}
+
+function pfun(x,y) {
+  return 2 * x;
+}
+
+function Bisection(y) {
+  var a = 0, b = 32, c;
+  var fa = fun(a, y), fb = fun(b, y), fc;
+  var delta = 1e-8, ep;
+
+  if (fa == 0) {
+    c = a;
+  } else if (fb == 0) {
+    c = b;
+  } else {
+    for (var i = 0; i < 50; i++) {
+      c = 0.5 * (a + b);
+      fc = fun(c, y);
+      ep = Math.abs(b - a);
+      if (ep < delta) {
+        break;
+      }
+      console.log("Iteracja",i)
+      console.log({a,fa,b,fb,c,fc})
+      if (fb * fc < 0) {
+        a = c;
+        console.log("a=c")
+        fa = fc;
+      } else {
+        b = c;
+        console.log("b=c")
+        fb = fc;
+      }
+    }
+  }
+  console.log("Iteracja",i)
+  console.log({a,fa,b,fb,c,fc})
+  return c;
+}
+console.log("Efekt koncowy",Bisection(500))
