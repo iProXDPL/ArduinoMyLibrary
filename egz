@@ -18,7 +18,7 @@ function gmin(a,b)
     fu=f(u);
     v = a+h*fi;
     fv=f(v);
-    for(let i=0;i<5;i++){
+    for(var i=0;i<5;i++){
         console.log("Iteracje",i)
         console.log({a,fa,u,fu,v,fv,b,fb})
         if(Math.abs(h)<eps){
@@ -52,6 +52,8 @@ function gmin(a,b)
         v = a+h*fi;
         fv=f(v);
     }
+    console.log("Iteracje",(i+1))
+    console.log({a,fa,u,fu,v,fv,b,fb})
 	return (fu<fv)? u:v; 
 }
 console.log("Efekt koncowy",gmin(0,512));
