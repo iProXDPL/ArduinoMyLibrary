@@ -1,4 +1,3 @@
-
 function f(x) {
   return (x*x - 500*x);
 }
@@ -18,20 +17,21 @@ function gmin(a,b)
     fu=f(u);
     v = a+h*fi;
     fv=f(v);
-    for(var i=0;i<5;i++){
+    for(var i=0;i<4;i++){
         console.log("Iteracje",i)
         console.log({a,fa,u,fu,v,fv,b,fb})
         if(Math.abs(h)<eps){
             break;
         }
-        if(fu>fv){  
+        if(fu>fv){
             a=u;
             fa=fu;
             u=v;      
             fu=fv;
             h=b-a;
             v=a+h*fi;
-            fv=f(v);    
+            fv=f(v);
+            console.log(">")
         }
         else
         {
@@ -42,6 +42,7 @@ function gmin(a,b)
             h=b-a;
             u=b-h*fi;
             fu=f(u);
+            console.log("<")
         }
         fa = f(a);
         fb=f(b);
