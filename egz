@@ -10,7 +10,39 @@ function gmin(a,b)
     var y=0;
     var fi = 0.61803399;
     var fa,fb,fh,fu,fv,u,v,h;
+    fa = f(a);
+    fb=f(b);
+    h = b-a
+    fh=f(h);
+    u = b-h*fi;
+    fu=f(u);
+    v = a+h*fi;
+    fv=f(v);
     for(let i=0;i<5;i++){
+        console.log("Iteracje",i)
+        console.log({a,fa,u,fu,v,fv,b,fb})
+        if(Math.abs(h)<eps){
+            break;
+        }
+        if(fu>fv){  
+            a=u;
+            fa=fu;
+            u=v;      
+            fu=fv;
+            h=b-a;
+            v=a+h*fi;
+            fv=f(v);    
+        }
+        else
+        {
+            b=v;
+            fb=fv;
+            v=u;
+            fv=fu;
+            h=b-a;
+            u=b-h*fi;
+            fu=f(u);
+        }
         fa = f(a);
         fb=f(b);
         h = b-a
@@ -19,33 +51,6 @@ function gmin(a,b)
         fu=f(u);
         v = a+h*fi;
         fv=f(v);
-        console.log("Iteracje",i)
-        console.log({a,fa,u,fu,v,fv,b,fb})
-        if(Math.abs(h)<eps){
-            break;
-        }
-        else
-        {
-            if(fu>fv){  
-                a=u;
-                fa=fu;
-                u=v;      
-                fu=fv;
-                h=b-a;
-                v=a+h*fi;
-                fv=f(v);    
-            }
-            else
-            {
-                b=v;
-                fb=fv;
-                v=u;
-                fv=fu;
-                h=b-a;
-                u=b-h*fi;
-                fu=f(u);
-            }
-        }
     }
 	return (fu<fv)? u:v; 
 }
