@@ -57,7 +57,6 @@ function gmin(a,b)
     console.log({a,fa,u,fu,v,fv,b,fb})
 	return (fu<fv)? u:v; 
 }
-console.log("Efekt koncowy",gmin(0,512));
 
 function fun(x,y) {
   return (x * x - y);
@@ -67,8 +66,8 @@ function pfun(x,y) {
   return 2 * x;
 }
 
-function Bisection(y) {
-  var a = 0, b = 32, c;
+function Bisection(a,b,y) {
+  var a = a, b = b, c;
   var fa = fun(a, y), fb = fun(b, y), fc;
   var delta = 1e-8, ep;
 
@@ -101,4 +100,60 @@ function Bisection(y) {
   console.log({a,fa,b,fb,c,fc})
   return c;
 }
-console.log("Efekt koncowy",Bisection(500))
+
+function Falsi(a,b,y) {
+  var a = a, b = b, c;
+  var fa = fun(a, y), fb = fun(b, y), fc;
+  var delta = 1e-8, ep;
+  if (fa == 0) {
+    c = a;
+  } else if (fb == 0) {
+    c = b;
+  } else {
+    for (var i = 0; i < 50; i++) {
+      c = b - (b - a) * fb / (fb - fa);
+      fc = fun(c, y);
+      ep = Math.min(Math.abs(a - c), Math.abs(b - c));
+      console.log("Iteracja",i)
+      console.log({a,fa,b,fb,c,fc})
+      if (ep < delta) {
+        break;
+      }
+      if (fb * fc < 0) {
+        a = c, fa = fc;
+      } else {
+        b = c, fb = fc;
+      }
+    }
+  }
+  console.log("Iteracja",i)
+  console.log({a,fa,b,fb,c,fc})
+  return c;
+}
+
+function Newton(x,y) {
+  var x = x, x1, f, pf;
+  var delta = 1e-8, ep, ksi;
+
+  for (var i = 0; i < 40; i++) {
+    f = fun(x, y);
+    pf = pfun(x, y);
+    x1 = x - f / pf;
+    ep = Math.abs(x1 - x);
+    ksi = ep / Math.abs(x1);
+    console.log("Iteracja",i)
+    console.log({x,x1,f,pf})
+    if (ep < delta || ksi < delta) {
+      break;
+    }
+    x = x1;
+  }
+  console.log("Iteracja",i)
+  console.log({x,x1,f,pf})
+  return x1;
+}
+
+//console.log("Efekt koncowy",gmin(0,512));
+//console.log("Efekt koncowy",Bisection(0,32,500))
+//console.log("Efekt koncowy",Falsi(0,32,500))
+//console.log("Efekt koncowy",Newton(128,500))
